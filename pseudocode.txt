@@ -1,0 +1,38 @@
+TEMPERATURE-CONTROLLED FAN SYSTEM - PSEUDOCODE
+===============================================
+
+CONSTANTS:
+    TEMP_SENSOR_PIN = A0
+    FAN_PIN = 7
+    TEMP_THRESHOLD = 30°C
+
+INITIALIZATION:
+    CONFIGURE FAN_PIN as OUTPUT
+    CONFIGURE TEMP_SENSOR_PIN as INPUT
+    SET FAN to OFF initially
+    INITIALIZE serial communication
+    DISPLAY "System Ready"
+
+MAIN LOOP (repeat forever):
+    
+    // INPUT: Read sensor
+    READ analog value from TEMP_SENSOR_PIN → sensorValue
+    
+    // PROCESSING: Convert to temperature
+    CALCULATE voltage = sensorValue × (5.0 / 1023.0)
+    CALCULATE temperature = (voltage - 0.5) × 100.0
+    
+    DISPLAY temperature value
+    
+    // DECISION: Control fan
+    IF temperature > TEMP_THRESHOLD THEN
+        SET FAN_PIN to HIGH (Turn fan ON)
+        DISPLAY "Fan ON"
+    ELSE
+        SET FAN_PIN to LOW (Turn fan OFF)
+        DISPLAY "Fan OFF"
+    END IF
+    
+    WAIT 1 second
+    
+END LOOP
